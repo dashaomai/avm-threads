@@ -59,7 +59,7 @@ public class ThreadManager
 	{
 		if (!_mutexToMain.tryLock())
 		{
-			trace('尝试给主线程队列加锁失败！');
+			trace('[Main] 尝试给主线程队列加锁失败！');
 			return;
 		}
 
@@ -70,7 +70,7 @@ public class ThreadManager
 
 		if (_commandsToMain.length)
 		{
-//			trace('[Main]:', JSON.stringify(_commandsToMain));
+			trace('[Main]', '主线程队列收到以下命令:', JSON.stringify(_commandsToMain));
 
 			for each (var command:ICommand in _commandsToMain)
 			{
@@ -82,7 +82,7 @@ public class ThreadManager
 
 					cb(ba);
 				} else {
-					trace('We lost the callback for command id:', command.id);
+					trace('[Main]', '找不到针对以下命令 id 的回调函数：', command.id);
 				}
 			}
 
@@ -105,7 +105,7 @@ public class ThreadManager
 		var result:Boolean = false;
 		if (callbacksDic[command.id])
 		{
-			trace('相同 id#', command.id, '的回调请求已经注册，前一回调将被覆盖');
+			trace('[Main]', '相同命令 id:', command.id, '的回调请求已经注册，前一回调将被覆盖');
 			result = true;
 		}
 

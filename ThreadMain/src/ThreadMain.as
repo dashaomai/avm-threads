@@ -41,7 +41,7 @@ public class ThreadMain extends DisplayObjectContainer
 
 		    if (commandsToWorker.length)
 		    {
-			    trace('[Thread]:', JSON.stringify(commandsToWorker));
+			    trace('[Thread]', '工作线程队列收到以下命令:', JSON.stringify(commandsToWorker));
 
 			    for each (var command:ICommand in commandsToWorker)
 			    {

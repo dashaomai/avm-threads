@@ -28,7 +28,9 @@ public class ThreadDemo extends DisplayObjectContainer
 
 	private function onReadedCallback(content:ByteArray):void
 	{
-		trace('On Readed Callback:\t', content ? content.bytesAvailable : 'null');
+		trace('[Main]', '文件读取结果：', content ? content.bytesAvailable : 'null');
+
+		content.clear();
 	}
 }
 }

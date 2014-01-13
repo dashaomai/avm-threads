@@ -41,7 +41,7 @@ public class AbstractCommand
 		if (inTheWorker(command))
 		{
 			Worker.current.setSharedProperty(String(command.id), value);
-			trace('[Thread]', 'Set ByteArray for id', command.id, 'is', value.bytesAvailable, 'bytes,');
+			trace('[Thread]', '为命令 id', command.id, '存储了', value.bytesAvailable, '字节的 ByteArray 到工作线程中');
 		}
 	}
 
@@ -51,7 +51,7 @@ public class AbstractCommand
 		var result:ByteArray = ThreadManager.worker.getSharedProperty(key);
 		ThreadManager.worker.setSharedProperty(key, null);
 
-		trace('[Main]', 'Get ByteArray for id', key, 'is', result ? result.bytesAvailable : '0', 'bytes.');
+		trace('[Main]', '为命令 id', key, '从工作线程中加载了', result ? result.bytesAvailable : '0', '字节的 ByteArray');
 		return result;
 	}
 }
