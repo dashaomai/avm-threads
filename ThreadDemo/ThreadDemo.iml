@@ -3,7 +3,7 @@
   <component name="FlexBuildConfigurationManager" active="ThreadDemo">
     <configurations>
       <configuration name="ThreadDemo" pure-as="true" main-class="ThreadDemo" output-file="ThreadDemo.swf" output-folder="$MODULE_DIR$/bin-debug">
-        <dependencies target-player="11.7">
+        <dependencies target-player="11.9">
           <entries>
             <entry library-id="91c39fce-83da-4125-9f43-eb8d35d0c36e">
               <dependency linkage="External" />
@@ -12,7 +12,7 @@
               <dependency linkage="Merged" />
             </entry>
           </entries>
-          <sdk name="AIR Sdk" />
+          <sdk name="AIRSDK_Compiler" />
         </dependencies>
         <compiler-options>
           <option name="additionalOptions" value="-compress=false" />
@@ -29,7 +29,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="AIR Sdk" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="jdk" jdkName="AIRSDK_Compiler" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">

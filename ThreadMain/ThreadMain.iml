@@ -3,7 +3,7 @@
   <component name="FlexBuildConfigurationManager" active="ThreadMain">
     <configurations>
       <configuration name="ThreadMain" pure-as="true" main-class="ThreadMain" output-file="ThreadMain.swf" output-folder="$MODULE_DIR$/../ThreadDemo/src">
-        <dependencies target-player="11.7">
+        <dependencies target-player="11.9">
           <entries>
             <entry library-id="911e52e9-f777-4fd6-bae8-e71300895a00">
               <dependency linkage="External" />
@@ -12,7 +12,7 @@
               <dependency linkage="Merged" />
             </entry>
           </entries>
-          <sdk name="AIR Sdk" />
+          <sdk name="AIRSDK_Compiler" />
         </dependencies>
         <compiler-options>
           <map>
@@ -32,7 +32,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="AIR Sdk" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="jdk" jdkName="AIRSDK_Compiler" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
