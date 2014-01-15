@@ -14,6 +14,7 @@ public class ThreadDemo extends DisplayObjectContainer
 {
 	public function ThreadDemo(args:String = ''):void
 	{
+		// 重要，使用线程方法前，需要调用该初始化功能
 		ThreadManager.init();
 
 		Stage.getStage().addEventListener(Event.ENTER_FRAME, onScheduleHandler);
@@ -24,10 +25,10 @@ public class ThreadDemo extends DisplayObjectContainer
 		ThreadManager.addCommand(new FileReadCommand('ThreadMain.swf'), onReadedCallback);
 	}
 
-
-
-	private function onReadedCallback(content:ByteArray):void
+	private function onReadedCallback(command:FileReadCommand):void
 	{
+		var content:ByteArray = command.execute();
+
 		trace('[Main]', '文件读取结果：', content ? content.bytesAvailable : 'null');
 
 		content.clear();
