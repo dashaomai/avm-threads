@@ -35,6 +35,7 @@ public class FileWriteCommand extends AbstractCommand implements ICommand
 	{
 		if (inTheWorker)
 		{
+			trace('[Thread] Begin to write bytes into path', path);
 			var content:ByteArray = getSharedProperty(this);
 			File.writeByteArray(path, content);
 			content.clear();

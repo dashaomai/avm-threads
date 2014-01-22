@@ -25,7 +25,7 @@ public class ThreadManager
 {
 	private static var _worker:Worker;
 
-	private static const callbacksDic:Array = [];
+	private static const callbacksDic:Vector.<Function> = new Vector.<Function>();
 
 	private static var _commandsToWorker:Array;
 	private static var _commandsToMain:Array;
