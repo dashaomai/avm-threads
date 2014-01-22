@@ -7,6 +7,9 @@ import core.filesystem.File;
 
 import flash.utils.ByteArray;
 
+/**
+ * 从指定路径读出文件的命令
+ */
 public class FileReadCommand extends AbstractCommand implements ICommand
 {
 	public var path:String;
@@ -26,7 +29,7 @@ public class FileReadCommand extends AbstractCommand implements ICommand
 
 	public function execute(...params:Array):*
 	{
-		if (inTheWorker(this))
+		if (inTheWorker)
 		{
 			var bytes:ByteArray = File.readByteArray(path);
 			bytes.shareable = true;

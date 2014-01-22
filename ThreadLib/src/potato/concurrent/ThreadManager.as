@@ -14,6 +14,7 @@ import flash.net.registerClassAlias;
 import flash.utils.ByteArray;
 
 registerClassAlias('concurrent.FileReadCommand', FileReadCommand);
+registerClassAlias('concurrent.FileWriteCommand', FileWriteCommand);
 
 /**
  * 线程管理者
@@ -24,7 +25,7 @@ public class ThreadManager
 {
 	private static var _worker:Worker;
 
-	private static const callbacksDic:Object = {};
+	private static const callbacksDic:Array = [];
 
 	private static var _commandsToWorker:Array;
 	private static var _commandsToMain:Array;
@@ -128,7 +129,7 @@ public class ThreadManager
 	 * @param callback      完成后调用的回调函数。该函数形式为：function(command:ICommand)
 	 * @return              是否覆盖了以前注册过相同 id 的回调
 	 */
-	public static function addCommand(command:ICommand, callback:Function):Boolean
+	public static function addCommand(command:ICommand, callback:Function = null):Boolean
 	{
 		var result:Boolean = false;
 		if (callbacksDic[command.id])
@@ -137,8 +138,11 @@ public class ThreadManager
 			result = true;
 		}
 
+		trace('before', JSON.stringify(callbacksDic));
+
 		callbacksDic[command.id] = callback;
 
+		trace('after', JSON.stringify(callbacksDic));
 		_commandsToWorker.push(command);
 
 		return result;

@@ -7,6 +7,7 @@ import core.events.Event;
 import flash.utils.ByteArray;
 
 import potato.concurrent.FileReadCommand;
+import potato.concurrent.FileWriteCommand;
 
 import potato.concurrent.ThreadManager;
 
@@ -31,7 +32,14 @@ public class ThreadDemo extends DisplayObjectContainer
 
 		trace('[Main]', '文件读取结果：', content ? content.bytesAvailable : 'null');
 
-		content.clear();
+//		content.clear();
+
+		ThreadManager.addCommand(new FileWriteCommand('ThreadMain.mbf', content), onWritedCallback);
+	}
+
+	private function onWritedCallback(command:FileWriteCommand):void
+	{
+		trace('[Main]', '文件已写入：', command.path);
 	}
 }
 }

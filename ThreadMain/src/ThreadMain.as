@@ -8,12 +8,14 @@ import flash.concurrent.Mutex;
 import flash.net.registerClassAlias;
 
 import potato.concurrent.FileReadCommand;
+import potato.concurrent.FileWriteCommand;
 
 import potato.concurrent.ICommand;
 
 import potato.concurrent.ThreadConsts;
 
 registerClassAlias('concurrent.FileReadCommand', FileReadCommand);
+registerClassAlias('concurrent.FileWriteCommand', FileWriteCommand);
 
 public class ThreadMain extends DisplayObjectContainer
 {
