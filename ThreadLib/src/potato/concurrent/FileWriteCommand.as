@@ -35,9 +35,9 @@ public class FileWriteCommand extends AbstractCommand implements ICommand
 	{
 		if (inTheWorker)
 		{
-			trace('[Thread] Begin to write bytes into path', path);
 			var content:ByteArray = getSharedProperty(this);
 			File.writeByteArray(path, content);
+			trace('[Thread] 已将', content.bytesAvailable, '字节数据存储到文件', path, '当中');
 			content.clear();
 		}
 	}

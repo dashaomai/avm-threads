@@ -25,7 +25,7 @@ public class ThreadManager
 {
 	private static var _worker:Worker;
 
-	private static const callbacksDic:Vector.<Function> = new Vector.<Function>();
+	private static const _callbacks:Array = [];
 
 	private static var _commandsToWorker:Array;
 	private static var _commandsToMain:Array;
@@ -47,8 +47,9 @@ public class ThreadManager
 	 *
 	 * @param path      包含了编译后线程代码的文件路径（可选）
 	 */
-	public static function init(path:String = 'ThreadMain.swf'):void {
-		if (!_worker)
+	public static function init(path:String = 'ThreadMain.swf'):void
+	{
+		if (Worker.current.isPrimordial && !_worker)
 		{
 			_worker = WorkerDomain.current.createWorkerFromByteArray(File.readByteArray(path));
 
@@ -108,9 +109,9 @@ public class ThreadManager
 		{
 			// 一次只处理一条指令并回调出去
 			var command:ICommand = _commandsToBeContinue.shift();
-			var cb:Function = callbacksDic[command.id];
+			var cb:Function = _callbacks[command.id];
 			if (cb) {
-				delete callbacksDic[command.id];
+				_callbacks[command.id] = null;
 
 				cb(command);
 			} else {
@@ -132,17 +133,13 @@ public class ThreadManager
 	public static function addCommand(command:ICommand, callback:Function = null):Boolean
 	{
 		var result:Boolean = false;
-		if (callbacksDic[command.id])
+		if (_callbacks[command.id])
 		{
 			trace('[Main]', '相同命令 id:', command.id, '的回调请求已经注册，前一回调将被覆盖');
 			result = true;
 		}
 
-		trace('before', JSON.stringify(callbacksDic));
-
-		callbacksDic[command.id] = callback;
-
-		trace('after', JSON.stringify(callbacksDic));
+		_callbacks[command.id] = callback;
 		_commandsToWorker.push(command);
 
 		return result;

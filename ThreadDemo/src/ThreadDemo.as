@@ -32,9 +32,9 @@ public class ThreadDemo extends DisplayObjectContainer
 
 		trace('[Main]', '文件读取结果：', content ? content.bytesAvailable : 'null');
 
-		content.clear();
+//		content.clear();
 
-//		ThreadManager.addCommand(new FileWriteCommand('ThreadMain.mbf', content), onWritedCallback);
+		ThreadManager.addCommand(new FileWriteCommand('ThreadMain.mbf', content), onWritedCallback);
 	}
 
 	private function onWritedCallback(command:FileWriteCommand):void

@@ -3,17 +3,13 @@
   <component name="FlexBuildConfigurationManager" active="ThreadLib">
     <configurations>
       <configuration name="ThreadLib" pure-as="true" output-type="Library" output-file="ThreadLib.swc" output-folder="$MODULE_DIR$/bin">
-        <dependencies target-player="11.9">
+        <dependencies target-player="11.7">
           <entries>
             <entry library-id="4c1e9a65-3ca2-4e85-bdfd-02dc67d96c4e">
               <dependency linkage="External" />
             </entry>
           </entries>
-<<<<<<< Updated upstream
-          <sdk name="AIRSDK_Compiler" />
-=======
           <sdk name="AIR Sdk 3.9" />
->>>>>>> Stashed changes
         </dependencies>
         <compiler-options>
           <option name="additionalOptions" value="-compress=false" />
@@ -30,11 +26,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-<<<<<<< Updated upstream
-    <orderEntry type="jdk" jdkName="AIRSDK_Compiler" jdkType="Flex SDK Type (new)" />
-=======
     <orderEntry type="jdk" jdkName="AIR Sdk 3.9" jdkType="Flex SDK Type (new)" />
->>>>>>> Stashed changes
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">

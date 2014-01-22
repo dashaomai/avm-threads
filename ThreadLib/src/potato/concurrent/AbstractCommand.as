@@ -14,6 +14,8 @@ public class AbstractCommand
 {
 	private static var requestId:int = 0;
 
+//	protected static var worker:Worker = Worker.current.isPrimordial ? ThreadManager.worker : Worker.current;
+
 	private var _id:int;
 
 	public function get id():int
@@ -47,20 +49,25 @@ public class AbstractCommand
 		return !Worker.current.isPrimordial;
 	}
 
+	protected static function get worker():Worker
+	{
+		return inTheWorker ? Worker.current : ThreadManager.worker;
+	}
+
 	protected static function setSharedProperty(command:ICommand, value:ByteArray):void
 	{
-		if (inTheWorker)
-		{
-			Worker.current.setSharedProperty(String(command.id), value);
+//		if (inTheWorker)
+//		{
+			worker.setSharedProperty(String(command.id), value);
 			trace('[Thread]', '为命令 id', command.id, '存储了', value.bytesAvailable, '字节的 ByteArray 到工作线程中');
-		}
+//		}
 	}
 
 	protected static function getSharedProperty(command:ICommand):ByteArray
 	{
 		var key:String = String(command.id);
-		var result:ByteArray = ThreadManager.worker.getSharedProperty(key);
-		ThreadManager.worker.setSharedProperty(key, null);
+		var result:ByteArray = worker.getSharedProperty(key);
+		worker.setSharedProperty(key, null);
 
 		trace('[Main]', '为命令 id', key, '从工作线程中加载了', result ? result.bytesAvailable : '0', '字节的 ByteArray');
 		return result;
