@@ -12,9 +12,10 @@ package potato.concurrent
 public interface ICommand
 {
 	/**
-	 * 命令的 id 值
+	 * 命令的 Id 编号
 	 *
-	 * id 是介于 ThreadConsts.MIN_REQUEST 到 ThreadConsts.MAX_REQUEST 之间的整数，
+	 * Id 是介于 ThreadConsts.MIN_REQUEST 到 ThreadConsts.MAX_REQUEST 之间的整数，
+	 * 系统的目标是保证不同的 ICommand 实例，Id 也不相同。
 	 * 它是循环使用的，这样如果有一项操作特别慢，id 轮转一圈后，有可能导致前一命令的执行无效化。
 	 */
 	function get id():int;

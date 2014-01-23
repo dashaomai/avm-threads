@@ -27,13 +27,13 @@ public class ThreadManager
 
 	private static const _callbacks:Array = [];
 
-	private static var _commandsToWorker:Array;
-	private static var _commandsToMain:Array;
+	private static var _commandsToWorker:Array = [];
+	private static var _commandsToMain:Array = [];
 	// 为防止批量命令一口气流向外部回调，特别设计 to be continue 的命令数组，以便控制外流的速度
-	private static var _commandsToBeContinue:Array;
+	private static var _commandsToBeContinue:Array = [];
 
-	private static var _mutexToWorker:Mutex;
-	private static var _mutexToMain:Mutex;
+	private static var _mutexToWorker:Mutex = new Mutex();
+	private static var _mutexToMain:Mutex = new Mutex();
 
 	public static function get worker():Worker
 	{
@@ -53,12 +53,9 @@ public class ThreadManager
 		{
 			_worker = WorkerDomain.current.createWorkerFromByteArray(File.readByteArray(path));
 
-			_mutexToWorker = new Mutex();
-			_mutexToMain = new Mutex();
-
-			_commandsToWorker = [];
-			_commandsToMain = [];
-			_commandsToBeContinue = [];
+			_commandsToWorker.length = 0;
+			_commandsToMain.length = 0;
+			_commandsToBeContinue.length = 0;
 
 			_worker.setSharedProperty(ThreadConsts.MUTEX2WORKER, _mutexToWorker);
 			_worker.setSharedProperty(ThreadConsts.MUTEX2MAIN, _mutexToMain);
@@ -132,6 +129,8 @@ public class ThreadManager
 	 */
 	public static function addCommand(command:ICommand, callback:Function = null):Boolean
 	{
+		init();
+
 		var result:Boolean = false;
 		if (_callbacks[command.id])
 		{
