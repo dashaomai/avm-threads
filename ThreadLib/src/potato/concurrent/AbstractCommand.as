@@ -17,13 +17,21 @@ public class AbstractCommand
 	private var _id:int;
 
 	/**
-	 * 命令的 Id 编号
+	 * 命令的 Id 编号。
+	 * 该 Id 编号将在 ThreadConsts.MIN_REQUEST 和 ThreadConsts.MAX_REQUEST 之间轮转
 	 */
 	public function get id():int
 	{
 		if (!_id)
 		{
-			_id = requestId = requestId < ThreadConsts.MAX_REQUEST ? ++requestId : ThreadConsts.MIN_REQUEST;
+			if (requestId < ThreadConsts.MAX_REQUEST)
+			{
+				_id = ++requestId;
+			}
+			else
+			{
+				_id = requestId = ThreadConsts.MIN_REQUEST;
+			}
 		}
 
 		return _id;
@@ -50,17 +58,30 @@ public class AbstractCommand
 		return !Worker.current.isPrimordial;
 	}
 
+	/**
+	 * 取得当前的工作线程
+	 */
 	protected static function get worker():Worker
 	{
 		return inTheWorker ? Worker.current : ThreadManager.worker;
 	}
 
+	/**
+	 * 为 ICommand 实例设置体外 ByteArray 数据，将该数据保存到工作线程的共享属性当中。
+	 * @param command
+	 * @param value
+	 */
 	protected static function setSharedProperty(command:ICommand, value:ByteArray):void
 	{
 		worker.setSharedProperty(String(command.id), value);
 		trace('[Thread]', '为命令 id', command.id, '存储了', value.bytesAvailable, '字节的 ByteArray 到工作线程中');
 	}
 
+	/**
+	 * 通过 ICommand 实例取出体外 ByteArray 数据，同时会将该数据从工作线程的共享属性中摘除。
+	 * @param command
+	 * @return
+	 */
 	protected static function getSharedProperty(command:ICommand):ByteArray
 	{
 		var key:String = String(command.id);

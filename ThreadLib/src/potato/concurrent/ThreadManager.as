@@ -66,6 +66,8 @@ public class ThreadManager
 			_worker.start();
 
 			Stage.getStage().addEventListener(Event.ENTER_FRAME, onScheduleHandler);
+			// 通过设计两个 EnterFrame 的事件侦听，让指令队列和向外回调的处理分离开
+			Stage.getStage().addEventListener(Event.ENTER_FRAME, onDispatchHandler);
 		}
 	}
 
@@ -101,10 +103,13 @@ public class ThreadManager
 			commands.length = 0;
 			_commandsToWorker.length = 0;
 		}
+	}
 
+	private static function onDispatchHandler(e:Event):void
+	{
 		if (_commandsToBeContinue.length)
 		{
-			// 一次只处理一条指令并回调出去
+			// TODO: 一次只处理一条指令并回调出去，可调整为时间阀值控制
 			var command:ICommand = _commandsToBeContinue.shift();
 			var cb:Function = _callbacks[command.id];
 			if (cb) {
@@ -114,7 +119,6 @@ public class ThreadManager
 			} else {
 				trace('[Main]', '找不到针对以下命令 id 的回调函数：', command.id);
 			}
-
 		}
 	}
 

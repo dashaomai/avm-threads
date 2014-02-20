@@ -15,9 +15,6 @@ public class ThreadDemo extends DisplayObjectContainer
 {
 	public function ThreadDemo(args:String = ''):void
 	{
-		// 重要，使用线程方法前，如果需要指定线程所在代码的 swf 文件，则需要调用该方法
-//		ThreadManager.init('ThreadMain.mbf');
-
 		Stage.getStage().addEventListener(Event.ENTER_FRAME, onScheduleHandler);
 	}
 
