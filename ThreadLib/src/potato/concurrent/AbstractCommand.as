@@ -74,7 +74,7 @@ public class AbstractCommand
 	protected static function setSharedProperty(command:ICommand, value:ByteArray):void
 	{
 		worker.setSharedProperty(String(command.id), value);
-		trace('[Thread]', '为命令 id', command.id, '存储了', value.bytesAvailable, '字节的 ByteArray 到工作线程中');
+		trace('[Thread]', '为命令 id', command.id, '存储了', value ? value.bytesAvailable : '0', '字节的 ByteArray 到工作线程中');
 	}
 
 	/**

@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="ThreadDemo">
     <configurations>
-      <configuration name="ThreadDemo" pure-as="true" main-class="ThreadDemo" output-file="ThreadDemo.swf" output-folder="$MODULE_DIR$/bin-debug">
+      <configuration name="ThreadDemo" pure-as="true" main-class="Main" output-file="ThreadDemo.swf" output-folder="$MODULE_DIR$/bin-debug">
         <dependencies target-player="11.9">
           <entries>
             <entry library-id="91c39fce-83da-4125-9f43-eb8d35d0c36e">

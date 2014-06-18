@@ -11,9 +11,9 @@ import potato.concurrent.FileWriteCommand;
 
 import potato.concurrent.ThreadManager;
 
-public class ThreadDemo extends DisplayObjectContainer
+public class Main extends DisplayObjectContainer
 {
-	public function ThreadDemo(args:String = ''):void
+	public function Main(args:String = ''):void
 	{
 		Stage.getStage().addEventListener(Event.ENTER_FRAME, onScheduleHandler);
 	}

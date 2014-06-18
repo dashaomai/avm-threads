@@ -31,8 +31,19 @@ public class FileReadCommand extends AbstractCommand implements ICommand
 	{
 		if (inTheWorker)
 		{
-			var bytes:ByteArray = File.readByteArray(path);
-			bytes.shareable = true;
+			var bytes:ByteArray = null;
+			var success:Boolean = true;
+			try
+			{
+				bytes = File.readByteArray(path);
+			}
+			catch (err:Error)
+			{
+				success = false;
+			}
+
+			if (success)
+				bytes.shareable = true;
 
 			setSharedProperty(this, bytes);
 		}

@@ -31,14 +31,26 @@ public class FileWriteCommand extends AbstractCommand implements ICommand
 		return CommandType.FILE_WRITE;
 	}
 
-	public function execute(...params):*
+	public function execute(...params:Array):*
 	{
 		if (inTheWorker)
 		{
 			var content:ByteArray = getSharedProperty(this);
-			File.writeByteArray(path, content);
-			trace('[Thread] 已将', content.bytesAvailable, '字节数据存储到文件', path, '当中');
-			content.clear();
+			var success:Boolean = !!content;
+
+			if (success)
+			{
+				try
+				{
+					File.writeByteArray(path, content);
+				}
+				catch (err:Error)
+				{
+					success = false;
+				}
+			}
+			trace('[Thread] 已将', success ? content.bytesAvailable : '0', '字节数据存储到文件', path, '当中');
+			if (success) content.clear();
 		}
 	}
 }
