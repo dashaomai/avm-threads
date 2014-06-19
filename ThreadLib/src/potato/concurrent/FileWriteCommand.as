@@ -14,15 +14,17 @@ public class FileWriteCommand extends AbstractCommand implements ICommand
 {
 	public var path:String;
 
-	public function FileWriteCommand(path:String = '', content:ByteArray = null):void
+	public function FileWriteCommand(path:String = '', content:ByteArray = null, priority:int = 0):void
 	{
-		if (content && path && !inTheWorker)
+		if (content && path)
 		{
 			this.path = path;
 
 			content.position = 0;
 			content.shareable = true;
 			setSharedProperty(this, content);
+
+			super(priority);
 		}
 	}
 
@@ -49,6 +51,7 @@ public class FileWriteCommand extends AbstractCommand implements ICommand
 					success = false;
 				}
 			}
+
 			trace('[Thread] 已将', success ? content.bytesAvailable : '0', '字节数据存储到文件', path, '当中');
 			if (success) content.clear();
 		}

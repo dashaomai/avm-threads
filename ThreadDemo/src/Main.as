@@ -20,7 +20,7 @@ public class Main extends DisplayObjectContainer
 
 	private function onScheduleHandler(e:Event):void
 	{
-		ThreadManager.addCommand(new FileReadCommand('ThreadMain.swf'), onReadedCallback);
+		ThreadManager.addCommand(new FileReadCommand('ThreadMain.swf', 1), onReadedCallback);
 	}
 
 	private function onReadedCallback(command:FileReadCommand):void
@@ -29,7 +29,7 @@ public class Main extends DisplayObjectContainer
 
 		trace('[Main]', '文件读取结果：', content ? content.bytesAvailable : 'null');
 
-//		content.clear();
+		content.clear();
 
 		ThreadManager.addCommand(new FileWriteCommand('ThreadMain.mbf', content), onWritedCallback);
 	}

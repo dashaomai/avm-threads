@@ -14,11 +14,13 @@ public class FileReadCommand extends AbstractCommand implements ICommand
 {
 	public var path:String;
 
-	public function FileReadCommand(path:String = ''):void
+	public function FileReadCommand(path:String = '', priority:int = 0):void
 	{
 		if (path)
 		{
 			this.path = path;
+
+			super(priority);
 		}
 	}
 

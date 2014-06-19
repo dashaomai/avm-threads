@@ -33,6 +33,8 @@ public class ThreadMain extends DisplayObjectContainer
 	    var commandsToWorker:Array = [];       // 由 ICommand 构成的数组
 	    var commandsToMain:Array = [];
 
+	    var sortParam:int = Array.NUMERIC | Array.DESCENDING;
+
 	    while (true)
 	    {
 		    mutexToWorker.lock();
@@ -43,6 +45,8 @@ public class ThreadMain extends DisplayObjectContainer
 
 		    if (commandsToWorker.length)
 		    {
+			    commandsToWorker.sortOn('priority', sortParam);
+
 			    trace('[Thread]', '工作线程队列收到以下命令:', JSON.stringify(commandsToWorker));
 
 			    for each (var command:ICommand in commandsToWorker)

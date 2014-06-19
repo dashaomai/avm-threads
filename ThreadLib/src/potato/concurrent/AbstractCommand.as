@@ -50,6 +50,23 @@ public class AbstractCommand
 			_id = value;
 	}
 
+	private var _priority:int;
+
+	public function get priority():int
+	{
+		return _priority;
+	}
+
+	public function set priority(value:int):void
+	{
+		_priority = value;
+	}
+
+	public function AbstractCommand(priority:int):void
+	{
+		this.priority = priority;
+	}
+
 	/**
 	 * 检查当前是否在工作线程内
 	 */
